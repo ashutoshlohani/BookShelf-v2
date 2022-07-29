@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import { useAsync } from './utils/hooks';
+
+import FullPageSpinner from './components/fullPageSpinner';
+import AuthenticatedApp from './pages/authenticated';
+import UnauthenticatedApp from './pages/unauthenticated';
+import { UserAuthContext } from './context/userAuth';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   const { currentUser } = React.useContext(UserAuthContext);
+
+   const { error, isLoading, isIdle, isError, isSuccess } = useAsync();
+
+   if (isLoading || isIdle) {
+      return <FullPageSpinner />;
+   }
+
+   if (isError) {
+      return (
+         <div>
+            <p>Uh oh... There's a problem. Try refreshing the app.</p>
+            <pre>{error.message}</pre>
+         </div>
+      );
+   }
+
+   if (isSuccess) {
+      return currentUser ? (
+         <Router>
+            <AuthenticatedApp />
+         </Router>
+      ) : (
+         <UnauthenticatedApp />
+      );
+   }
 }
 
 export default App;
