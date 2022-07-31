@@ -1,0 +1,32 @@
+.search-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+   width: 30rem;
+   margin: 8rem auto 2rem;
+   padding: 0.1rem 1rem;
+   border-radius: 100px;
+   border: 2px solid rgba(65, 65, 65, 0.314);
+   textarea:focus,
+   input:focus {
+      outline: none;
+   }
+
+   input {
+      display: flex;
+      border: none;
+      font-size: medium;
+      height: 2.5rem;
+      width: 100%;
+      background-color: transparent;
+   }
+
+   button {
+      height: 2.5rem;
+      width: 2.5rem;
+      background: none;
+      border: none;
+      opacity: 0.6;
+      cursor: pointer;
+   }
+}
