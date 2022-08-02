@@ -8,12 +8,10 @@ export const UserAuthContext = React.createContext({
 
 export const UserProvider = ({ children }) => {
    const [currentUser, setCurrentUser] = React.useState(null);
-   console.log(currentUser);
 
    React.useEffect(() => {
       const unsubscribe = onAuthStateChangedListner(user => {
          setCurrentUser(user);
-         console.log(user);
       });
       return unsubscribe;
    }, [currentUser]);

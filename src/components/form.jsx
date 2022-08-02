@@ -4,13 +4,11 @@ import {
    signInUserWithGooglePopup,
    registerUserWithEmail,
 } from '../utils/firebase.config';
-import { FaSpinner } from 'react-icons/fa';
+
 import '../styles/form.styles.scss';
 import '../styles/spinner.styles.scss';
 
 function Form({ onSubmit, buttonText }) {
-   const [visible, setVisible] = React.useState(false);
-
    function handleSubmit(event) {
       event.preventDefault();
       const { email, password } = event.target.elements;
@@ -19,8 +17,6 @@ function Form({ onSubmit, buttonText }) {
          email: email.value,
          password: password.value,
       });
-
-      setVisible(true);
    }
 
    return (
@@ -35,11 +31,9 @@ function Form({ onSubmit, buttonText }) {
             <br />
             <input id='password' type='password' required />
          </div>
+
          <div className='button-container'>
-            <button type='submit'>
-               {buttonText}
-               {visible && <FaSpinner className='spinner' />}
-            </button>
+            <button type='submit'>{buttonText}</button>
          </div>
       </form>
    );

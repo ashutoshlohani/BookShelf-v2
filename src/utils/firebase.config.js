@@ -10,12 +10,12 @@ import {
 } from 'firebase/auth';
 
 const firebaseConfig = {
-   apiKey: 'AIzaSyA1ItgsbVrDwuDtx24oYERMDWUIxVsTcuE',
-   authDomain: 'bookshelf-1997.firebaseapp.com',
-   projectId: 'bookshelf-1997',
-   storageBucket: 'bookshelf-1997.appspot.com',
-   messagingSenderId: '71569784379',
-   appId: '1:71569784379:web:be366e22e1f15cc902661e',
+   apiKey: 'AIzaSyBLnBbDvx2KYh1Gtx1RzHHgoXatUloWdD4',
+   authDomain: 'bookshelf-5abb7.firebaseapp.com',
+   projectId: 'bookshelf-5abb7',
+   storageBucket: 'bookshelf-5abb7.appspot.com',
+   messagingSenderId: '532456118233',
+   appId: '1:532456118233:web:224daf9bfa43d12556ebc8',
 };
 
 // Initialize Firebase

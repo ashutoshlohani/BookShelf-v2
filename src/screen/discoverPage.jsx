@@ -4,26 +4,21 @@ import BookCardList from '../components/book-card-list';
 import SearchBar from '../components/search-bar';
 
 import { client } from '../utils/api-client';
+import { useAsync } from '../utils/hooks';
 
 const DiscoverPage = () => {
-   const [status, setStatus] = React.useState('idle');
-   const [booksData, setBooksData] = React.useState();
+   const { data: booksData, error, run, isLoading, isError, isSuccess } = useAsync();
+
    const [query, setQuery] = React.useState();
    const [queried, setQueried] = React.useState(false);
-
-   const isLoading = status === 'loading';
-   const isSuccess = status === 'success';
 
    React.useEffect(() => {
       if (!queried) {
          return;
       }
-      setStatus('loading');
-      client(`/volumes?q=${encodeURIComponent(query)}&maxResults=5`).then(responseData => {
-         setBooksData(responseData);
-         setStatus('success');
-      });
-   }, [queried, query]);
+
+      run(client(`/volumes?q=${encodeURIComponent(query)}&maxResults=5`));
+   }, [queried, query, run]);
 
    function handleSubmit(event) {
       event.preventDefault();
@@ -33,7 +28,12 @@ const DiscoverPage = () => {
 
    return (
       <>
-         <SearchBar handleSubmit={handleSubmit} isLoading={isLoading} />
+         <SearchBar
+            handleSubmit={handleSubmit}
+            isLoading={isLoading}
+            isError={isError}
+            error={error}
+         />
 
          {isSuccess ? (
             booksData?.items?.length ? (
