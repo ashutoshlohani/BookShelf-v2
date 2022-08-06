@@ -4,7 +4,7 @@ import '../styles/spinner.styles.scss';
 const FullPageSpinner = () => {
    return (
       <>
-         <FaSpinner />
+         <FaSpinner className='spinner' />
       </>
    );
 };

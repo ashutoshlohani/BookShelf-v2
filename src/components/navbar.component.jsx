@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { signOutUser } from '../utils/firebase.config';
 import { UserAuthContext } from '../context/userAuth.context';
 
@@ -16,21 +16,21 @@ const NavBar = () => {
       <>
          <div className='navbar'>
             <div className='logo'>
-               <a href='1' className='logo-text'>
+               <Link to='/' className='logo-text'>
                   Book
                   <span>Shelf</span>
-               </a>
+               </Link>
             </div>
             <div className='menu-items'>
-               <a href='1' className='nav-links'>
+               <Link to='/' className='nav-links'>
                   Discover
-               </a>
-               <a href='1' className='nav-links'>
+               </Link>
+               <Link to='/readingList' className='nav-links'>
                   Reading List
-               </a>
-               <a href='1' className='nav-links'>
+               </Link>
+               <Link to='/finishedBooks' className='nav-links'>
                   Finished Books
-               </a>
+               </Link>
             </div>
             <div className='user'>
                <div className='user-details'>
@@ -39,14 +39,17 @@ const NavBar = () => {
                   </div>
                   <div className='user-name'>{userName}</div>
                </div>
-               <div className='logout'>
-                  <button onClick={signOutUser} className='logout-button'>
-                     Log out
-                  </button>
-               </div>
+
+               <Link to='/'>
+                  <div className='logout'>
+                     <button onClick={signOutUser} className='logout-button'>
+                        Log out
+                     </button>
+                  </div>
+               </Link>
             </div>
          </div>
-         {/* <Outlet /> */}
+         <Outlet />
       </>
    );
 };

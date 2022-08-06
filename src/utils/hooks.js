@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+//////////////////////////////////////////////////////////////////////
+
 function useSafeDispatch(dispatch) {
    const mounted = React.useRef(false);
    React.useLayoutEffect(() => {
@@ -12,29 +14,44 @@ function useSafeDispatch(dispatch) {
    );
 }
 
+//////////////////////////////////////////////////////////////////////
+
 const defaultInitialState = { status: 'idle', data: null, error: null };
+
+//////////////////////////////////////////////////////////////////////
+
 function useAsync(initialState) {
+   //###################################//
    const initialStateRef = React.useRef({
       ...defaultInitialState,
       ...initialState,
    });
+
+   //###################################//
    const [{ status, data, error }, setState] = React.useReducer(
       (s, a) => ({ ...s, ...a }),
       initialStateRef.current
    );
 
+   //###################################//
    const safeSetState = useSafeDispatch(setState);
 
+   //###################################//
    const setData = React.useCallback(
       data => safeSetState({ data, status: 'resolved' }),
       [safeSetState]
    );
+
+   //###################################//
    const setError = React.useCallback(
       error => safeSetState({ error, status: 'rejected' }),
       [safeSetState]
    );
+
+   //###################################//
    const reset = React.useCallback(() => safeSetState(initialStateRef.current), [safeSetState]);
 
+   //###################################//
    const run = React.useCallback(
       promise => {
          if (!promise || !promise.then) {
